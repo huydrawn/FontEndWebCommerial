@@ -4,6 +4,7 @@ import { LoginService } from './services/login.service';
 import { Response } from './models/response';
 import { TimmerService } from './services/timmer.service';
 import { UserService } from './services/user.service';
+import { JwtToken } from './models/jwt-token';
 
 @Component({
   selector: 'app-root',
@@ -22,6 +23,9 @@ export class AppComponent implements OnDestroy,OnInit {
   }
   @HostListener('click', ['$event'])
   onInteraction(event: MouseEvent) {
+    const jwtToken = JSON.parse(localStorage.getItem("token") as string) as JwtToken; 
+    console.log("at app components")
+    this.timmer.refreshToken(jwtToken.expried)
     this.timmer.startTimer(15,()=>{
       this.loginService.logout();
     })
