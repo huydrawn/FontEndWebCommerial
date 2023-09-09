@@ -1,0 +1,74 @@
+<div class="container-fluid text-white d-flex flex-column fixed-top"
+    style="background: linear-gradient(#ee4d2d,#ff7337); z-index: 10;">
+    <div class=" d-flex justify-content-between mx-5 " style="margin-bottom: -20px;">
+        <div class="pe-3 flex-fill d-flex flex-row">
+            <a class="d-flex flex-row" href="#">
+                <p>Trở thành người bán</p>|
+            </a>
+            <a href="/seller">
+                <p> Kênh người bán</p>
+            </a>
+        </div>
+        <div *ngIf='!isLoggin()' class="d-flex flex-row">
+            <div><a class="d-flex flex-row" href="/signup">
+                    <p>Đăng kí</p>|
+                </a></div>
+            <div><a href="/signin">
+                    <p> Đăng nhập</p>
+                </a></div>
+        </div>
+        <div *ngIf='isLoggin()'>
+            <nav class="navbar navbar-expand-sm " style="padding: 0px;">
+                <div class="container-fluid ">
+                    <a class="navbar-brand d-flex flex-row flex-fill ">
+                        <div class="container-fluid flex-fill "><img [src]="userService.getAvatar()" style="width:30px; height: auto;"
+                                class="rounded-pill"></div>
+                        <div class="d-flex ">
+                            <button class="d-flex " style="font-size: 10px; color: inherit;" mat-button
+                                [matMenuTriggerFor]="menu">{{userService.user!.userName}}</button>
+                            <mat-menu #menu="matMenu" class="hover-menu">
+                                <a href="/profile"> <button mat-menu-item>Tài Khoản của tôi</button></a>
+                                <a href=""> <button mat-menu-item>Đơn mua</button></a>
+                                <button mat-menu-item (click)="logout()">Đăng xuất</button>
+                            </mat-menu>
+                        </div>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <div class="container-fluid d-flex justify-content-around align-items-center px-3"
+        style=" margin: 0px -10px;margin-bottom: -10px; ">
+        <div class="d-flex align-items-center justify-content-center">
+            <nav class="navbar navbar-expand-sm ">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">
+                        <img src="../../../assets/img/logo.png" alt="Logo" style="width:60px;" class="rounded-pill">
+                    </a>
+                </div>
+            </nav>
+        </div>
+        <div class="input-group w-50 mx-5 d-flex justify-content-center flex-column">
+            <app-search-page></app-search-page>
+        </div>
+        <div class="d-flex align-items-center justify-content-center">
+            <a href="#" data-bs-toggle="tooltip" title="Go To Your Card!">
+                <mat-icon>add_shopping_cart</mat-icon>
+            </a>
+        </div>
+    </div>
+    <div class="d-flex align-items-center justify-content-center mb-2 " style="font-size: 10px;">
+        <a class="px-2">Đồ 0k</a>
+        <a class="px-2">iPhone 1k</a>
+        <a class="px-2">Đồ 1k</a>
+        <a class="px-2">iPhone 14 Pro Max</a>
+        <a class="px-2">Áo 1k</a>
+        <a class="px-2">Dép Nữ</a>
+        <a class="px-2">Set Đồ Nữ</a>
+        <a class="px-2">Ốp</a>
+        <a class="px-2">Đồ 1k Quần Áo</a>
+        <a class="px-2">Quần Ống Loe</a>
+        <a class="px-2">Áo Thun</a>
+        <a class="px-2">Đồ Dùng Học Tập</a>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="container-fluid bg-light d-flex">
+
+    <app-header></app-header>
+
+    <div class="container-fluid d-flex justify-content-center" style="margin-top: 135px;">
+        <div class="d-flex  justify-content-center flex-column" style="height: 300px; margin-bottom: 50px;">
+
+            <h1 > Ooops Error!!! </h1><br>
+            <div *ngIf="accountStatus == 'Unauthozied'">
+               <p> Your Account haven't vertificate ! </p>
+               <P>Please Go To your<a href="https://mail.google.com/mail/"> Gmail Account </a> to verfiticate</P>
+               <p>If you don't see any my vertification please <button>click here</button> to send again</p>
+            </div>
+            <div *ngIf="accountStatus == 'Forbiden'">
+                <p> Your Account have banned ! </p>
+                <P>Please Go To your<a href="https://mail.google.com/mail/"> help ? </a> to get any answer</P>
+             </div>
+        </div>
+
+
+    </div>
+</div>

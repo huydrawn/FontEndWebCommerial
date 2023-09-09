@@ -1,0 +1,158 @@
+<div class="container-fluid d-flex flex-column bg-light" style="padding: 0px ;">
+    <app-header></app-header>
+
+    <div class="container-fluid d-flex flex-row" style=" margin-top: 130px;">
+        <div class="container-fluid flex-fill col-2" style="border-left: 1px solid light; padding: 0px;">
+            <div class="container-fluid  d-flex flex-column" style="padding: 0px; margin-top: 80px;">
+                <div class="flex-fill"> <i class="fa-solid fa-user"></i> Tài Khoản của tôi</div>
+                <div class="container d-flex flex-column">
+                    <a>
+                        <div class="flex-fill mt-3"> <i class="fa-solid fa-book"></i> Hồ sơ</div>
+                    </a>
+                    <a>
+                        <div class="flex-fill mt-3"> <i class="fa-solid fa-money-check"></i> Ngân Hàng</div>
+                    </a>
+                    <a>
+                        <div class="flex-fill mt-3"> <i class="fa-solid fa-location-dot"></i> Địa chỉ</div>
+                    </a>
+                    <a>
+                        <div class="flex-fill mt-3"> <i class="fa-solid fa-lock"></i> Đổi mật khẩu</div>
+                    </a>
+                </div>
+                <a>
+                    <div class="flex-fill mt-3"> <i class="fa-solid fa-file-invoice"></i> Đơn mua</div>
+                </a>
+                <a>
+                    <div class="flex-fill mt-3"> <i class="fa-solid fa-bell"></i> Thông báo</div>
+                </a>
+            </div>
+        </div>
+        <div class="container-fluid bg-white mt-3 rounded-1 flex-fill col-10">
+            <div class="container-fluid p-3 ">
+                <div style="border-bottom: 1px solid lightgray;">
+                    <p style="margin: 0;
+                font-size: 1.125rem;
+                font-weight: 500;
+                line-height: 1.5rem;
+                text-transform: capitalize;
+                color: #333;
+            ">Hồ Sơ Của Tôi</p>
+                    <p class="margin-top: 0.1875rem;
+                font-size: .875rem;
+                line-height: 1.0625rem;
+                color: #555;">Quản lý thông tin hồ sơ để bảo mật tài khoản</p>
+                </div>
+                <div class="container-fluid d-flex flex-row py-3" style="padding-left: 0px;">
+                    <div class="container-fluid col-8">
+                        <div class="flex-fill d-flex flex-row">
+                            <div class="col-4 pe-3" style="    text-align: right;
+                        color: rgba(85,85,85,.8);
+                        overflow: hidden;
+                        padding-bottom: 30px;
+                        white-space: nowrap;
+                        min-width: 20%;">
+                                <p> Tên Đăng Nhập</p>
+                            </div>
+                            <div class="col-8 flex-fill">
+                                <input style="width: 100%;" type="text" [value]="userService.user!.userName" disabled>
+                            </div>
+                        </div>
+                        <div class="flex-fill d-flex flex-row">
+                            <div class="col-4 pe-3" style="    text-align: right;
+                        color: rgba(85,85,85,.8);
+                        overflow: hidden;
+                        padding-bottom: 30px;
+                        white-space: nowrap;
+                        min-width: 20%;">
+                                <p>Tên</p>
+                            </div>
+                            <div class="col-8 flex-fill">
+                                <input style="width: 100%;" type="text" [(ngModel)]="userService.user!.name">
+                            </div>
+                        </div>
+                        <div class="flex-fill d-flex flex-row">
+                            <div class="col-4 pe-3" style="    text-align: right;
+                        color: rgba(85,85,85,.8);
+                        overflow: hidden;
+                        padding-bottom: 30px;
+                        white-space: nowrap;
+                        min-width: 20%;">
+                                <p> Email</p>
+                            </div>
+                            <div class="col-8 flex-fill">
+                                <p>{{userService.user!.email}}</p>
+                            </div>
+                        </div>
+                        <div class="flex-fill d-flex flex-row">
+                            <div class="col-4 pe-3" style="    text-align: right;
+                        color: rgba(85,85,85,.8);
+                        overflow: hidden;
+                        padding-bottom: 30px;
+                        white-space: nowrap;
+                        min-width: 20%;">
+                                <p>Số Điện Thoại</p>
+                            </div>
+                            <div class="col-8 flex-fill">
+                                <input style="width: 100%;" type="text" [(ngModel)]="userService.user!.numberPhone">
+                            </div>
+                        </div>
+                        <div class="flex-fill d-flex flex-row">
+                            <div class="col-4 pe-3" style="    text-align: right;
+                        color: rgba(85,85,85,.8);
+                        overflow: hidden;
+                        padding-bottom: 30px;
+                        white-space: nowrap;
+                        min-width: 20%;">
+                                <p>Giới Tính</p>
+                            </div>
+                            <mat-radio-group [(ngModel)]="userService.user!.gender">
+                                <mat-radio-button *ngFor="let option of radioOptions" [value]="option.value">{{
+                                    option.label}}</mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                        <div class="flex-fill d-flex flex-row">
+                            <div class="col-4 pe-3" style="    text-align: right;
+                        color: rgba(85,85,85,.8);
+                        overflow: hidden;
+                        padding-bottom: 30px;
+                        white-space: nowrap;
+                        min-width: 20%;">
+                                <p>Ngày Sinh</p>
+                            </div>
+                            <mat-form-field>
+                                <input matInput [matDatepicker]="picker" placeholder="Chọn ngày"
+                                    [(ngModel)]="userService.user!.birth_day">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div class="container-fluid flex-fill d-flex align-items-center justify-content-center ">
+                            <button (click)="save()" style="color: #fff;
+                            width: 100px;
+                            position: relative;
+                            overflow: visible;
+                            outline: 0;
+                            background: #ee4d2d;">Lưu</button>
+                        </div>
+                    </div>
+
+                    <div class="container-fluid col-4 d-flex  " style="border-left: 1px solid lightgray; padding: 0px;">
+                        <div class="navbar-brand flex-fill ">
+                            <div class="flex-fill  d-flex flex-column align-items-center  justify-content-center">
+                                <div>Avatar</div>
+                                <img [src]="avatarImage" style="width:100px; height: 100px; "
+                                    class="rounded-pill border border-1 ">
+                            </div>
+                            <div class="flex-fill d-flex justify-content-center flex-column">
+                                <input type="file" id="avatar" name="avatar" (change)="selectAvatar($event)"
+                                    accept="image/*" style="padding-left: 40px;">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

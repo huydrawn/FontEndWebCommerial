@@ -1,0 +1,91 @@
+
+<div class="container-fluid d-flex justify-content-between bg-white align-items-center px-3  fixed-top"
+    style="color: orangered;">
+    <div class="d-flex align-items-center justify-content-center ">
+        <nav class="navbar navbar-expand-sm ">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img src="../../../assets/img/logo.png" alt="Logo" style="width:60px;" class="rounded-pill">
+                </a>
+            </div>
+
+        </nav>
+        <div>
+            <h2 class="pt-3">Đăng Ký</h2>
+        </div>
+    </div>
+
+    <div class="d-flex ">
+        <a href="#" data-bs-toggle="tooltip" title="Go To The Help">
+            <p style="float: right;">bạn cần sự giúp đỡ ?</p>
+        </a>
+    </div>
+</div>
+<div class="container-fluid bg-white d-flex flex-column " style="color: orangered; padding: 0px; padding-top: 80px;">
+
+
+    <div class="container-fluid justify-content-center align-items-center"
+        style=" background: linear-gradient(#ee4d2d,#ff7337) ;">
+        <div class="container  bg-white my-3 text-black rounded" style="width: 35%;">
+            <div class="container d-flex flex-column p-3 justify-content-between">
+                <div>
+                    <h2 class="text-regular">Đăng Ký</h2>
+                </div>
+                <div>
+                    
+                    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                        <div class="form-group  pb-3">
+                            <input placeholder="Email" type="email" class="form-control" id="email"
+                                formControlName="email" required>
+                            <span class="text-danger"
+                                *ngIf="registerForm.controls['email'].invalid && (registerForm.controls['email'].dirty || registerForm.controls['email'].touched)">Email
+                                không hợp lệ !</span>
+                        </div>
+                        <div class="form-group pb-3">
+
+                            <input placeholder="Username" type="text" class="form-control" id="username"
+                                formControlName="username" required>
+                            <span class="text-danger"
+                                *ngIf="registerForm.controls['username'].invalid && (registerForm.controls['username'].dirty || registerForm.controls['username'].touched)">Username
+                                không hợp lệ !</span>
+                        </div>
+                        <div class="form-group pb-3">
+
+                            <input placeholder="Password" type="password" class="form-control" id="password"
+                                formControlName="password" required>
+                            <span class="text-danger"
+                                *ngIf="registerForm.controls['password'].invalid && (registerForm.controls['password'].dirty || registerForm.controls['password'].touched)">Password
+                                không hợp lệ !</span>
+                        </div>
+                        <div class="form-group">
+
+                            <input placeholder="ComfirmPassword" type="password" class="form-control"
+                                id="confirmPassword" formControlName="confirmPassword" required>
+                            <span class="text-danger"
+                                *ngIf="registerForm.controls['confirmPassword'].invalid && (registerForm.controls['confirmPassword'].dirty || registerForm.controls['confirmPassword'].touched)">Confirm
+                                Password không hợp lệ !</span><br>
+                            <span class="text-danger"
+                                *ngIf="registerForm.hasError('notMatch') && (registerForm.controls['confirmPassword'].dirty || registerForm.controls['confirmPassword'].touched)">Confirm
+                                Password không trùng khớp !</span>
+                        </div>
+                        <button type="submit" class="fw-normal w-100 btn btn-success"
+                            [disabled]="!registerForm.valid">Đăng Ký</button>
+                    </form>
+                </div>
+                <div>
+                    <div class="d-flex flex-row bg-white justify-content-between">
+                        <div class="flex-fill "><button
+                                class="flex-fill mt-3 border border-light border-2 w-100">Google</button></div>
+                        <div class="flex-fill "><button
+                                class="flex-fill mt-3 border border-light border-2 w-100">Facebook</button></div>
+                    </div>
+                    <div class="d-flex align-items-center mt-3 justify-content-center">
+                        <p><span style="color: gray;">bạn đã có tài khoản? /</span><a href="/signin"
+                                style="color: #ff7337;"> Đăng nhập</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

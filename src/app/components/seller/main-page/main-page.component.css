@@ -1,0 +1,48 @@
+a{
+    text-decoration: none;
+    cursor: pointer;
+}
+.sider-bar-menu-items{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    
+    font-weight: 500;
+    color: #999;
+    cursor: pointer;
+}
+.sider-bar-menu-items  i.icon-rotation{
+    transition: transform 0.1s ease-in-out; /* Hiệu ứng xoay */
+  
+}
+
+.sider-bar-menu-items:hover  i.icon-rotation {
+    
+    color: #ee4d2d
+    
+}  
+.sider-bar-menu-items:active i.icon-rotation  {
+    transform: rotate(180deg); /* Độ xoay 180 độ khi được tập trung */
+    
+  }
+  .sidernav{
+    min-height: 500px;
+    max-height: 500px;
+    overflow-y: scroll;
+  }
+  
+  /* Tùy chỉnh thanh cuộn */
+.sidernav::-webkit-scrollbar {
+    width: 5px; /* Độ rộng của thanh cuộn */
+  }
+  
+  /* Tùy chỉnh "nút" của thanh cuộn */
+  .sidernav::-webkit-scrollbar-thumb {
+    background-color: #413f3f; /* Màu của nút thanh cuộn */
+    border-radius: 10px; /* Độ cong của nút thanh cuộn */
+  }
+  
+  /* Tùy chỉnh phần "đường dẫn" của thanh cuộn */
+  .sidernav::-webkit-scrollbar-track {
+    background-color: #615e5e; /* Màu của đường dẫn thanh cuộn */
+  }

@@ -1,0 +1,17 @@
+a {
+    color: inherit;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+a:hover {
+    opacity: 0.5;
+}
+
+.form-control::placeholder {
+    font-size: 12px;
+    /* Kích thước chữ nhỏ hơn */
+}
+span{
+    font-size: 12px;
+}

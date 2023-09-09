@@ -1,0 +1,46 @@
+a {
+    color: inherit;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+a:hover p {
+    opacity: 0.5;
+}
+.full-home-panel{
+    line-height: 0;
+    display: flex;
+    object-fit: contain;
+    min-height: 200px;
+    max-height: 210px;
+}
+.popover-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 9999;
+ }
+ .ulitie{
+   
+    width: 60%;
+    border-radius: 20px;
+    height: 5em;
+ }
+ .equal-cols [class^="col-"] {
+    flex-basis: calc(100% / 9);
+    max-width: calc(100% / 9);
+  }
+  /* hover-dropdown.component.css */
+.hover-menu {
+    display: none; /* Ẩn menu ban đầu */
+  }
+  
+  .button:hover + .hover-menu {
+    display: block; /* Hiển thị menu khi nút được hover */
+  }
+
+  .category:hover{
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  }
