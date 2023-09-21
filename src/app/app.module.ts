@@ -32,12 +32,16 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ErrorPageNotVertificationComponent } from './components/error-page/error-page.component';
 import { MainPageComponent } from './components/seller/main-page/main-page.component';
-// import { CollapseModule } from '@coreui/angular';
-// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatTreeModule } from '@angular/material/tree';
 import { CommonModule } from '@angular/common';
 import { AllProductSellComponent } from './components/seller/all-product-sell/all-product-sell.component';
 import { AddSellProductComponent } from './components/seller/add-sell-product/add-sell-product.component';
+import { HomePageComponent } from './components/seller/home-page/home-page.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { EditProductComponent } from './components/seller/edit-product/edit-product.component';
+import { HighchartsChartModule } from 'highcharts-angular';
+import { DetailProductComponent } from './components/detail-product/detail-product.component';
+
 
 
 
@@ -56,11 +60,14 @@ import { AddSellProductComponent } from './components/seller/add-sell-product/ad
     MainPageComponent,
     AllProductSellComponent,
     AddSellProductComponent,
+    HomePageComponent,
+    EditProductComponent,
+    DetailProductComponent,
     
 
   ],
   imports: [
-    // CollapseModule,
+    HighchartsChartModule ,
     MatNativeDateModule,
     MatDatepickerModule,
     MatRadioModule,
@@ -68,6 +75,7 @@ import { AddSellProductComponent } from './components/seller/add-sell-product/ad
     MatTreeModule,
     MatButtonModule, // Add MatButtonModule
     MatTooltipModule,// Add MatTooltipModule
+    MatDialogModule,
     MatMenuModule,
     FormsModule,
     ToastrModule.forRoot({ 

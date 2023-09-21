@@ -1,1 +1,147 @@
-<p>all-product-sell works!</p>
+<div class="container-fluid bg-light p-3  d-flex flex-column" style="padding: 0;">
+   
+    <div class="container-fluid d-flex justify-content-center flex-column bg-white  p-5 rounded-1 "
+        style="box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); padding: 0;">
+        
+        <div class=" d-flex flex-row flex-fill ">
+            
+            <div class="d-flex flex-row col-6 ">
+                <div>
+                    <select style="height: 30px; width: 150px; border: 1px solid lightgray;" id="countries"
+                        [(ngModel)]="indexOfChoosenCriteria" name="country">
+                        <option *ngFor="let criteria of criterias ; let i = index" [value]="i">{{ criteria.name }}
+                        </option>
+                    </select>
+                </div>
+                <div>
+                    <input style="height: 30px; min-width: 350px; border: 1px solid lightgray;"
+                        [placeholder]="criterias[indexOfChoosenCriteria].criteria" type="text" required>
+                </div>
+            </div>
+            
+            <div class="d-flex flex-row col-6">
+                <div class="d-flex justify-content-center align-items-center me-2">
+                    <h3 style="text-align: center;">Ngành hàng</h3>
+                </div>
+                <div>
+                    <select style="height: 30px; width: 150px; border: 1px solid lightgray;">
+                        <option *ngFor="let productType of productTypeService.getProductsType(); let i = index" [value]="i">{{ productType.name }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+       
+        <div class="d-flex flex-row">
+            <button class="btn text-white" style="width: 100px; background-color: #ee4d2d ; ">Tìm</button>
+        </div>
+    </div>
+
+    
+    <div class="container-fluid d-flex  flex-column bg-white mt-5  rounded-1 "
+        style="box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); padding: 0;">
+        <div class="container mt-3">
+            
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" style="color: #ee4d2d;" data-bs-toggle="tab" href="#products">
+                        Tất cả<span style="color: black;">({{this.productService.infoProduct.length}})</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: #ee4d2d;" data-bs-toggle="tab" href="#menu1">Đang Hoạt Động<span
+                            style="color: black;"> 4</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: #ee4d2d;" data-bs-toggle="tab" href="#menu2">Hết Hàng<span
+                            style="color: black;">({{getNumberProductGetOutOfInStock()}})</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: #ee4d2d;" data-bs-toggle="tab" href="#menu2">Chờ sử lý<span
+                            style="color: black;"> 4</span></a>
+                </li>
+            </ul>
+
+           
+            <div class="container-fluid d-flex tab-content ">
+               
+                <div id="products" class="container tab-pane active p-2 "><br>
+                    <div class=" d-flex flex-column ">
+                        <div style="">
+                            <h2>{{this.productService.infoProduct.length}} Sản Phẩm</h2>
+                        </div>
+                        <div>
+                            <table class="table table-bordered">
+                                <thead class="table-success">
+                                    <tr>
+                                        <th>Tên Sản Phẩm</th>
+                                        <th>Loại Hàng</th>
+                                        <th>Giá tiền</th>
+                                        <th>Số lượng</th>
+                                        <th>Doanh Số</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let product of this.productService.infoProduct ; let i = index">
+                                        <td>{{product.name}}</td>
+                                        <td>{{product.productType}}</td>
+                                        <td>{{product.price}}</td>
+                                        <td>{{product.inStock}}</td>
+                                        <td>{{product.orders}}</td>
+                                        <td>
+                                            <div class="d-flex flex-row justify-content-between px-3">
+                                                <div (click)="delete(product.id , i)">
+                                                    <i class="fa-solid fa-trash-can"></i>
+                                                </div>
+                                                <div (click)="openDialog(product.id)">
+                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+               
+                <div id="menu1" class="container tab-pane fade"><br>
+                    <div class="message-box " style="width: 60%;">
+                        <div class="message">
+                            <img src="user-avatar.jpg" alt="User Avatar" class="user-avatar">
+                            <div class="message-content">
+                                <p class="user-name">John Doe</p>
+                                <p class="message-text">Hello! How are you doing?</p>
+                            </div>
+                        </div>
+                        <div class="message d-flex flex-row-reverse">
+                            <img src="friend-avatar.jpg" alt="Friend Avatar" class="user-avatar">
+                            <div class="message-content  ">
+                                <p class="user-name">Friend Name</p>
+                                <p class="message-text">I'm doing great. Thanks for asking!</p>
+                            </div>
+                        </div>
+                        <div class="chat-input">
+                            <input placeholder="Type your message...">
+                            <button>Send</button>
+                        </div>
+                    </div>
+                </div>
+               
+                <div id="menu2" class="container tab-pane fade"><br>
+                    <h3>Menu 2</h3>
+                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
+                        totam rem aperiam.</p>
+                </div>
+                
+                <div id="menu2" class="container tab-pane fade"><br>
+                    <h3>Menu 2</h3>
+                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
+                        totam rem aperiam.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

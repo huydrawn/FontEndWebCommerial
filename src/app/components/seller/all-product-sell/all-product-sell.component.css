@@ -1,0 +1,36 @@
+.message-box {
+    width: 300px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px;
+    overflow-y: scroll;
+    max-height: 400px;
+  }
+  
+  .message {
+    display: flex;
+    margin-bottom: 10px;
+  }
+  
+  .user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .user-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .message-text {
+    margin: 0;
+  }
+  .cdk-overlay-container {
+    
+    overflow-y: auto; /* Cho phép cuộn dọc khi cần thiết */
+    z-index: 100000;
+  }

@@ -11,6 +11,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class HeaderComponent {
   userService:UserService;
+  showMenu = false;
   
   constructor(private userservie: UserService, private loginservice: LoginService, private decode: DecodeService, private convert: ConvertService) {
     this.userService = userservie;

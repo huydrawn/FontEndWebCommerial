@@ -6,3 +6,33 @@ p{
 .requird{
     color: rgb(248, 104, 8);
 }
+div.sticky {
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    bottom: 0;
+    background-color: white;
+    border: 2px solid lightblue ;
+  }
+
+  .custom-file-input::-webkit-file-upload-button {
+    visibility: hidden;
+    display: none;
+  }
+  .custom-file-input::before {
+    content: 'Chọn Hình Ảnh'; /* Nội dung bạn muốn hiển thị trên nút */
+    display: inline-block;
+    background: #007bff;
+    color: #fff;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  /* Tùy chỉnh kiểu hiển thị của nút tùy chỉnh */
+  .custom-file-input:hover::before {
+    background: #0056b3;
+  }
+  .custom-file-input::after {
+    content: ''; /* Xóa nội dung hiển thị */
+    display: none; /* Ẩn phần tử này */
+  }

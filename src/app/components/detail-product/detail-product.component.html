@@ -1,0 +1,117 @@
+<div class="container-fluid ">
+    <app-header></app-header>
+    <div style="margin-top: 160px;"></div>
+    <div class=" mx-3 mt-3 d-flex flex-row"
+        style=" border: 1px solid lightgray; box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);;">
+        <div class="contain col-5 p-2 d-flex flex-column flex-fill">
+            <div class="container flex-fill" [style.background-image]="'url(' + this.getVarient().image + ')'"
+                style=" background-size: contain;  background-repeat: no-repeat; width: 100%; height: 500px; box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);">
+            </div>
+        </div>
+        <div class="col-7 d-flex flex-column p-2">
+            <div class="text-tilte">{{this.p!.name}}</div>
+            <div class="bg-light mt-5 d-flex flex-row align-items-center justify-content-center" style="height: 50px;">
+                <div class="d-flex align-items-center justify-content-center price" style="letter-spacing: 2;">
+                    <h1 *ngIf="this.minPrice != this.maxPrice" style="letter-spacing: 1.5px; margin: 0px;">{{
+                        this.minPrice |
+                        currency:'VND':'symbol':'1.0-0' }} - {{
+                        this.maxPrice | currency:'VND':'symbol':'1.0-0' }}
+                    </h1>
+                    <h1 *ngIf="this.minPrice == this.maxPrice" style="letter-spacing: 2px; margin: 0px;">{{
+                        this.maxPrice |
+                        currency:'VND':'symbol':'1.0-0' }}
+                    </h1>
+                </div>
+            </div>
+            <div class="container-fluid d-flex flex-column px-5" style="margin-top: 50px;">
+                <div class="d-flex flex-row my-3" *ngFor="let attribute of attributes ; let i = index">
+                    <div class="text-burler">{{attribute.name}} :</div>
+                    <div style=" display: grid;grid-template-columns: repeat(4, minmax(100px, 1fr)); grid-gap: 20px; ">
+                        <div *ngFor="let value of attribute.value ; let j = index"
+                            [class.selected]="selected(i,j)" (click)="selectedValue(i,j)"
+                            class="btn varient">
+                            {{value.name}}
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex flex-row my-3">
+                    <div class="text-burler">Số Lượng :</div>
+                    <div class="d-flex flex-row">
+                        <div class="d-flex justify-content-center align-items-center" (click)="minus()"
+                            style="border: 1px solid lightgray;  width: 30px;"><i class="fa-regular fa-minus"></i></div>
+                        <div><input [(ngModel)]="amount" type="number" min="1" [max]="this.getVarient().amount">
+                        </div>
+                        <div class="d-flex justify-content-center align-items-center" (click)="plus()"
+                            style="border: 1px solid lightgray; width: 30px;"><i class="fa-regular fa-plus"></i></div>
+                        <div class="ms-2"> Còn lại : {{this.getVarient().amount}} </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="container-fluid d-flex flex-row px-5 mt-5">
+                <div class="" style=" color: #d0011b; background: rgba(208,1,27,.08);;border: 1px solid #d0011b;"
+                    class="btn"><i class="fa-solid fa-cart-shopping"></i> Thêm vào giỏ hàng</div>
+                <div style="color: white; background-color: #d0011b;" class="btn">Mua ngay</div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class=" mx-3 mt-3 d-flex flex-row px-2 py-3 mt-5"
+        style=" border: 1px solid lightgray; box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);;">
+        <div class="col-3 d-flex flex-column justify-content-center ps-5 " style=" border-right: 1px solid lightgray;">
+            <h3 class="flex-fill">Cỏ Mềm Official Store</h3>
+            <p class="text-burler flex-fill" style="font-size: 12px; width: 100%;">hoạt động 19 giờ trước</p>
+        </div>
+        <div class="col-9"></div>
+    </div>
+    <div style=" border: 1px solid lightgray; box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); "
+        class=" mx-3 mt-3 d-flex flex-column px-2 py-3 mt-5">
+        <div class="d-flex flex-column flex-fill">
+            <div class=" flex-fill justify-content-center align-items-center" style="background-color: lightgray;">
+                <h2 class="ms-5" style="margin: 0px; line-height: 50px;">CHI TIẾT SẢN PHẨM</h2>
+            </div>
+            <div class="d-flex flex-row align-items-center mt-5 px-2 ">
+                <p class="text-burler">Đanh mục : </p>
+                <p>Điện Thoại</p>
+            </div>
+            <div class="d-flex flex-row align-items-center mt-5 px-2 ">
+                <p class="text-burler">Kho Hàng : </p>
+                <p style="text-align: center; margin: 0px;">Điện Thoại</p>
+            </div>
+        </div>
+        <div class="d-flex flex-column flex-fill mt-5 ">
+            <div class=" flex-fill justify-content-center align-items-center" style="background-color: lightgray;">
+                <h2 class="ms-5" style="margin: 0px; line-height: 50px;">MÔ TẢ SẢN PHẨM</h2>
+            </div>
+            <div class="d-flex flex-row align-items-center mt-5 px-2 ">
+                <p class="text-burler">Đanh mục : </p>
+                <p>Điện Thoại</p>
+            </div>
+            <div class="d-flex flex-row align-items-center mt-5 px-2 ">
+                <p class="text-burler">Kho Hàng : </p>
+                <p style="text-align: center; margin: 0px;">Điện Thoại</p>
+            </div>
+        </div>
+
+    </div>
+    <div class=" mx-3 mt-3 d-flex flex-column px-2 py-3 mt-5"
+        style=" border: 1px solid lightgray; box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); ">
+        <div>
+            <h2>Đánh Giá Sản Phẩm</h2>
+        </div>
+        <div class="d-flex flex-row justify-content-center mt-5 py-5" style="background-color: #fffbf8;">
+            <div class="col-3 d-flex flex-column justify-content-center align-items-center" style="letter-spacing: 2; color: #D0011A;stroke: #d0011b;">
+                <div  class="d-flex flex-row">
+                    <h1 class="me-2">4.9</h1>
+                    <h2>trên 5</h2>
+                </div>
+                <div class="d-flex flex-row flex-fill mt-3" ><i class="fa-solid fa-star fa-2xl me-2"></i><i class="fa-solid fa-star"></i><i
+                        class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+            </div>
+            <div class="col-9"></div>
+        </div>
+    </div>
+    <div style="height: 100px;"></div>
+</div>

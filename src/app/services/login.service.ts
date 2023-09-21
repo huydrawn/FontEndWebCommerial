@@ -35,7 +35,7 @@ export class LoginService {
     strictDiscoveryDocumentValidation: false,
   }
 
-  constructor(private userService:UserService ,private http: HttpClient, private toastr: ToastrService, private router: Router, private oauth: OAuthService, private timmer: TimmerService) {
+  constructor(private userService: UserService, private http: HttpClient, private toastr: ToastrService, private router: Router, private oauth: OAuthService, private timmer: TimmerService) {
     this.oauth.configure(this.config);
     this.oauth.loadDiscoveryDocumentAndTryLogin();
   }
@@ -52,7 +52,9 @@ export class LoginService {
   }
 
   navigateAfterLogin() {
+    console.log(localStorage.getItem("token"))
     this.http.get<Response>("http://localhost:8080/account/status").subscribe((res) => {
+      console.log(res)
       if (res.msg == "Authorized") {
         if (localStorage.getItem("rebackURL")) {
           this.router.navigate([`${localStorage.getItem("rebackURL")}`]);
@@ -61,7 +63,7 @@ export class LoginService {
         else {
           this.router.navigate(["/"]);
         }
-        this.timmer.startTimer(15 , ()=>{
+        this.timmer.startTimer(15, () => {
           this.logout();
         });
         this.userService.loadUser();
@@ -75,6 +77,11 @@ export class LoginService {
 
       }
       this.statusAccount = res.msg;
+    }, error => {
+      this.router.navigate(["/error-page"])
+      localStorage.removeItem("token");
+      this.oauth.logOut();
+
     })
   }
 
@@ -95,13 +102,14 @@ export class LoginService {
   }
   gotoLogin() {
     this.router.navigate(["/signin"]);
-  }
+  } 
   isLoggin() {
     return localStorage.getItem("token");
   }
-  login(login: LoginRequest) {
+  login(login: LoginRequest) { 
+
     this.http.post<JwtToken>(`${this.baseUrl}`, login).subscribe((res) => {
-      localStorage.setItem("token", res.token);
+      localStorage.setItem("token", JSON.stringify(res));
       if (localStorage.getItem("token")) {
 
         this.navigateAfterLogin();

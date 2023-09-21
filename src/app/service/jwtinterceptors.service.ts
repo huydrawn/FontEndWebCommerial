@@ -7,16 +7,18 @@ import { JwtToken } from '../models/jwt-token';
 })
 export class JwtinterceptorsService implements HttpInterceptor {
   private excludedUrls = ['https://accounts.google.com/.well-known/openid-configuration', '/www.googleapis.com/oauth2/v3/certs', 'https://www.googleapis.com/oauth2/v3/userinfo', 'https://openidconnect.googleapis.com/v1/userinfo', 'https://www.googleapis.com/oauth2/v4/token'
-    , '/signup', 'http://localhost:8080/api/auth/csrf-token', 'https://accounts.google.com/.well-known/openid-configuration'];;
+    , '/signup', 'http://localhost:8080/api/auth/csrf-token', 'https://accounts.google.com/.well-known/openid-configuration'];
   private isFetchingToken = false;
   constructor(private tokenExtractor: HttpXsrfTokenExtractor) { }
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     if (this.shouldExcludeUrl(req.url)) {
       return next.handle(req);
     }
-    const authToken =  localStorage.getItem("token") as string;
-    const jwtToken = JSON.parse(authToken) as JwtToken;
-    if (jwtToken ) {
+   
+    if (localStorage.getItem("token") ) {
+      const authToken =  localStorage.getItem("token") as string;
+      const jwtToken = JSON.parse(authToken) as JwtToken;
+      console.log(jwtToken.token)
       req = req.clone({
         headers: req.headers.set('Authorization', `Bearer ${jwtToken.token}`)
       });   

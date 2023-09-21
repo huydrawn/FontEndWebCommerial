@@ -27,9 +27,7 @@ export class TimmerService {
 
   refreshToken(expried:Date){
     const timeToExpried = new Date(expried).getTime() - new Date().getTime();
-    console.log("check if refresh")
-    if(timeToExpried < 6000000 * 1000){
-      console.log("refresh")
+    if(timeToExpried < 60 * 1000){   
       this.jwtTokenService.refreshToken();
     }
 

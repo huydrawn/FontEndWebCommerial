@@ -198,3 +198,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
       width: 25em;
     }
   }
+  .text-light-cumstom{
+    margin-top: 6px;
+    font-size: 12px;
+    font-weight: 400;
+    color: #999;
+  }

@@ -5,14 +5,21 @@
         <div class="container-fluid d-flex flex-row align-items-center mt-3">
             <h2 style="color: #ee4d2d;">ShopLight</h2>
             <h5>Kênh người bán</h5>
+            <div class="d-flex flex-row mx-2">
+                <div *ngFor="let path of currentPath ; let i = index">
+                    <div class="path" (click)="checkForHomePage(i)">
+                        <h2>> {{path}}</h2>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="me-5">
             <a class="navbar-brand d-flex flex-row  ">
-                <div class="d-flex align-items-center"><img [src]="userService.getAvatar()" alt="hình ảnh" style="width:30px; height: auto;"
-                        class="rounded-pill"></div>
+                <div class="d-flex align-items-center"><img [src]="userService.getAvatar()" alt="hình ảnh"
+                        style="width:30px; height: auto;" class="rounded-pill"></div>
                 <div class="d-flex ">
                     <button class="d-flex " style="font-size: 10px; color: inherit;" mat-button
-                        [matMenuTriggerFor]="menu">{{userService.user!.name}}</button>
+                        [matMenuTriggerFor]="menu">{{userService.user?.name}}</button>
                     <mat-menu #menu="matMenu" class="hover-menu">
                         <a href="/profile"> <button mat-menu-item>Hồ sơ shop</button></a>
                         <a href=""> <button mat-menu-item>Đơn mua</button></a>
@@ -24,9 +31,9 @@
     </div>
 
     <!--body-->
-    <div class="container-fluid d-flex flex-row" style="padding: 0px; margin-top: 64px;">
+    <div class="container-fluid d-flex bg-white flex-row" style="padding: 0px; margin-top: 64px;">
         <div class="sidernav container col-2 d-flex flex-column mt-3 " style=" width: 200px;
-            position: fixed;top: 64px;left: 0;z-index: 1030;">
+            position: fixed;top: 64px;left: 0;z-index: 800;">
             <div class="">
                 <div class=" sider-bar-menu-items d-flex justify-content-center flex-row" (click)="change(0)">
                     <div class="flex-fill d-flex flex-row ">
@@ -41,10 +48,10 @@
                     </div>
                 </div>
                 <div *ngIf="show[0]" style="padding-left: 20px;">
-                    <a (click)="insertComponent(searchPageComponent[0])">
+                    <a (click)="insertComponent(searchPageComponent[0] , 1)">
                         <p>Tất cả sản phẩm</p>
                     </a>
-                    <a (click)="insertComponent(searchPageComponent[1])">
+                    <a (click)="insertComponent(searchPageComponent[1] ,1)">
                         <p>Thêm sản phẩm</p>
                     </a>
                 </div>
@@ -75,9 +82,10 @@
                 </div>
             </div>
         </div>
-        <div class=" container-fluid " style="margin-left: 200px; margin-top: 10px;" >
-            <!-- <div #content></div> -->
-            <app-add-sell-product></app-add-sell-product>
+        <div class=" container-fluid " style="margin-left: 200px; margin-top: 10px;">
+                <div #content></div>
+               
+                <!-- <app-all-product-sell></app-all-product-sell> -->
         </div>
     </div>
 

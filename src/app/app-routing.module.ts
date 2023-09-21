@@ -8,7 +8,13 @@ import { UploadfileComponent } from './components/uploadfile/uploadfile.componen
 import { ProfileComponent } from './components/profile/profile.component';
 import { ErrorPageNotVertificationComponent } from './components/error-page/error-page.component';
 import { MainPageComponent } from './components/seller/main-page/main-page.component';
-const routes: Routes = [{ path: '', component: MainComponent }, { path: 'seller', component: MainPageComponent }, { path: 'error-page', component: ErrorPageNotVertificationComponent }, { path: 'profile', component: ProfileComponent }, { path: 'upload', component: UploadfileComponent }, { path: 'search', component: SearchPageComponent }, { path: 'signup', component: SignupComponent }, { path: 'signin', component: SinginComponent }];
+import { DetailProductComponent } from './components/detail-product/detail-product.component';
+const routes: Routes = [{ path: '', component: MainComponent }, { path: 'seller', component: MainPageComponent }, 
+{ path: 'error-page', component: ErrorPageNotVertificationComponent }, { path: 'profile', component: ProfileComponent },
+ { path: 'upload', component: UploadfileComponent }, { path: 'search', component: SearchPageComponent },
+  { path: 'signup', component: SignupComponent }, { path: 'signin', component: SinginComponent },
+  { path: 'product/:slug', component: DetailProductComponent }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

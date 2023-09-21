@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ConvertService } from 'src/app/services/convert.service';
+import { DecodeService } from 'src/app/services/decode.service';
 
 import { ProductTypeService } from 'src/app/services/product-type.service';
 
@@ -10,14 +12,15 @@ import { ProductTypeService } from 'src/app/services/product-type.service';
   templateUrl: './uploadfile.component.html',
   styleUrls: ['./uploadfile.component.css']
 })
+
 export class UploadfileComponent {
   @ViewChild('image', { static: true }) image: ElementRef | undefined;
   productName: string = '';
   files: File[] = [];
   selectedFiles: { file: File; url: string }[] = []; // Array of objects to store files and their URLs
-  images:string[] = [];
+  images: string[] = [];
 
-  constructor(private http: HttpClient, private formBuilder: FormBuilder, private producttypeservice: ProductTypeService) { }
+  constructor(private http: HttpClient, private formBuilder: FormBuilder, private decode: DecodeService, private convert: ConvertService, private producttypeservice: ProductTypeService) { }
 
   remove(url: string) {
     for (let i = 0; i < this.selectedFiles.length; i++) {
@@ -46,7 +49,7 @@ export class UploadfileComponent {
     const binaryString = atob(encodedData); // Giải mã Base64 thành chuỗi binary
     const length = binaryString.length;
     const bytes = new Uint8Array(length);
-    
+
     for (let i = 0; i < length; i++) {
       bytes[i] = binaryString.charCodeAt(i); // Chuyển đổi thành mảng byte
     }
@@ -55,16 +58,20 @@ export class UploadfileComponent {
   }
 
   onSubmit(): void {
-    if(this.files[0]){
+    if (this.files[0]) {
       console.log("ok")
     }
-    this.http.post("http://localhost:8080/test" ,this.files[0] , {responseType:'blob'}).subscribe((res)=>{
-      const blob = new Blob([res], { type: 'application/octet-stream' });
-      this.images.push(URL.createObjectURL(blob));
-    },
-    (error)=>{
+    const blob = new Blob([this.files[0]], { type: 'application/octet-stream' });
+    // this.convert.
 
-    })
+    // this.http.post("http://localhost:8080/test" ,new FileTest(blob) ).subscribe((res)=>{
+    //   // const blob = new Blob([res], { type: 'application/octet-stream' });
+    //   // this.images.push(URL.createObjectURL(blob));
+    //   console.log(res)
+    // },
+    // (error)=>{
+
+    // })
     // console.log(this.productName);
     // console.log(this.files);
     // const dataForm = new FormData();
@@ -80,10 +87,10 @@ export class UploadfileComponent {
     //   this.images.push(url);
     //   // Xử lý dữ liệu blob tại đây (hiển thị hoặc lưu trữ vào ổ đĩa)
     // });
-   
+
     // this.producttypeservice.getProductsType().subscribe((res)=>{
     //   for(let i = 0 ;  i < res.length ; i++){
-    //     const s = this.decodeBase64(res[i].image);
+        // const s = this.decodeBase64(res[i].image);
     //     const blob = new Blob([s], { type: 'application/octet-stream' });
     //     const url = URL.createObjectURL(blob);
     //     this.images.push(url); // Store the file and its URL in the array
@@ -116,8 +123,15 @@ export class UploadfileComponent {
     //   }
     // );
 
-   
+
 
     // Send the product and selected files to the server or perform your desired processing.
-  }
+  // }
 }
+}
+// class FileTest{
+//   file : Blob;
+//   constructor(file:Blob){
+//     this.file = file;
+//   }
+// }

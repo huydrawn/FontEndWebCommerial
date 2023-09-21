@@ -20,16 +20,33 @@ export class DecodeService {
     }
     return bytes;}
   }
-  encodeFileToBase64(file: File, callback: (base64String: string) => void): void {
+  encodeFileToBase64(file: File, callback: (base64String: string) => void): string {
     const reader = new FileReader();
-
+    reader.readAsDataURL(file); // Đọc và mã hóa tệp thành chuỗi Base64
     reader.onload = (event) => {
       const base64String = (event.target!.result as string).split(',')[1]; // Lấy phần Base64 từ kết quả
       if (callback) {
         callback(base64String);
       }
+      return base64String;
     };
+    return "";
+  }
+  async encodeFileToBase64s(file: File): Promise<string | null> {
+    if (!file) {
+      return null;
+    }
 
-    reader.readAsDataURL(file); // Đọc và mã hóa tệp thành chuỗi Base64
+    return new Promise<string | null>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const base64String = event.target!.result as string;
+        resolve(base64String);
+      };
+      reader.onerror = (event) => {
+        reject(event);
+      };
+      reader.readAsDataURL(file);
+    });
   }
 }

@@ -1,0 +1,17 @@
+.text-light-cumstom{
+    margin-top: 6px;
+    font-size: 12px;
+    font-weight: 400;
+    color: #999;
+  }
+  .item{
+    margin-bottom: 7px;
+    font-size: 16px;
+    min-height: 18px;
+    color: #2673dd;
+    font-weight: 700;
+  }
+  .item-box:hover{
+    background-color: rgb(223, 231, 234);
+    cursor: pointer;
+  }

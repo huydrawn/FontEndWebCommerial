@@ -46,3 +46,6 @@ a{
   .sidernav::-webkit-scrollbar-track {
     background-color: #615e5e; /* Màu của đường dẫn thanh cuộn */
   }
+  .path{
+    cursor: pointer;
+  }

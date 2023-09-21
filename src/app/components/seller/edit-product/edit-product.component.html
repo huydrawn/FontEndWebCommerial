@@ -1,10 +1,10 @@
 <div class="container-fluid d-flex flex-column p-0  " style="background-color: darkgray;">
-    <!--Thông tin cơ bản-->
+
     <div class="container-fluid d-flex flex-column bg-white mt-3 pb-2">
         <div class="ms-3 mt-3" style="font-weight: 400;">
             <h1 style="font-weight: 500;">Thông tin cơ bản</h1>
         </div>
-        <!-- add images -->
+
         <div class="d-flex flex-row flex-fill" style="height: 200px;">
             <div class="col-2" style="text-align: right;">
                 <p>Hình ảnh sản phẩm</p>
@@ -15,65 +15,66 @@
                     <p><span class="requird">*</span>hình ảnh tỉ lệ 1:1</p>
                 </div>
                 <div class="d-flex flex-row">
-                    <input class="custom-file-input" type="file" id="productImages" (change)="selectFileForImageProduct($event)"
-                        name="productImages" accept="image/*" required>
+                    <input class="custom-file-input" type="file" id="productImages"
+                        (change)="selectFileForImageProduct($event)" name="productImages" accept="image/*" required>
                     <div style="border: 1px dashed gray;">
-                        <img [src]="imageProductURL!" (click)="deleteImage"
-                            style="width: 150px; height: auto;" alt="Hình ảnh">
+                        <img [src]="convert.byteToURLFile(decode.decodeBase64toByteArray(productInformation.image!))"
+                             style="width: 150px; height: auto;" alt="Hình ảnh">
                     </div>
                 </div>
             </div>
         </div>
-        <!-- name -->
+
         <div class="d-flex flex-row flex-fill mt-3">
             <div class="col-2" style="text-align: right;">
                 <p><span class="requird">*</span> Tên sản phẩm</p>
             </div>
             <div class="col-10 d-flex flex-row ms-3 ">
-                <input style="height: 30px; width: 60%;" [(ngModel)]="name" type="text" placeholder="Tên sản phẩm" required>
+                <input style="height: 30px; width: 60%;" [(ngModel)]="productInformation.name" type="text"
+                    placeholder="Tên sản phẩm" required>
             </div>
         </div>
-        <!-- nghành hàng -->
+
         <div class="d-flex flex-row flex-fill mt-3">
             <div class="col-2" style="text-align: right;">
                 <p><span class="requird">*</span> Loại sản phẩm</p>
             </div>
             <div class="col-10 d-flex flex-row ms-3 ">
-                <select (change)="onProductTypeSelectionChange($event)">
-                    <option *ngFor="let product of productTypes " [value]="product.id">
+                <select [(ngModel)]="productInformation.idProductType">
+                    <option *ngFor="let product of productTypeService.getProductsType() " [value]="product.id">
                         {{ product.name }}
                     </option>
                 </select>
             </div>
         </div>
-        <!-- Mô tả sản phẩm -->
+
         <div class="d-flex flex-row flex-fill mt-3">
             <div class="col-2" style="text-align: right;">
                 <p><span class="requird">*</span> Mô tả sản phẩm</p>
             </div>
             <div class="col-10 d-flex flex-row ms-3 ">
-                <textarea (click)="setCursorToStart($event)" (change)="onDescriberProductTypeSelectionChange($event)" #describer rows="4" cols="50" required>
+                <textarea [(ngModel)]="productInformation.describer" (click)="setCursorToStart($event)" #describer
+                    rows="4" cols="50" required>
 
                  </textarea>
             </div>
         </div>
     </div>
 
-    <!-- Thông Tin chi tiết-->
+
     <div class="container-fluid d-flex flex-column bg-white mt-3  pb-2  ">
         <div class="ms-3 mt-3" style="font-weight: 400;">
             <h1 style="font-weight: 500;">Thông tin chi tiết</h1>
         </div>
-        <!-- add images -->
 
 
-        <!-- giới tính -->
+
         <div class="d-flex flex-row flex-fill mt-3">
             <div class="col-2" style="text-align: right;">
                 <p><span class="requird">*</span> Giới tính</p>
             </div>
             <div class="col-10 d-flex flex-row ms-3 ">
-                <select (change)="onGenderSelectionChange($event)">
+                <select [(ngModel)]="productInformation.gender">
                     <option *ngFor="let gender of genders " [value]="gender">
                         {{gender }}
                     </option>
@@ -83,13 +84,13 @@
 
     </div>
 
-    <!-- Thông Tin bán hàng-->
+
     <div class="container-fluid d-flex flex-column bg-white mt-3 pb-2 ">
         <div class="ms-3 mt-3" style="font-weight: 400;">
             <h1 style="font-weight: 500;">Thông tin bán hàng</h1>
         </div>
-        <!--chưa phân loại nhóm-->
-        <div *ngIf="attributes.length == 0">
+
+        <div *ngIf="productInformation.details!.length == 0">
             <div class="d-flex flex-row flex-fill mt-3 align-items-center">
                 <div class="col-2" style="text-align: right;">
                     <p> Phân Loại Hàng</p>
@@ -105,21 +106,23 @@
                         <p><span class="requird">*</span> Giá</p>
                     </div>
                     <div class="col-10 d-flex flex-row ms-3 ">
-                        <input [(ngModel)]="price" style="height: 30px; width: 60%;" type="number" placeholder="VNĐ" required>
+                        <input [(ngModel)]="productInformation.price" style="height: 30px; width: 60%;" type="number"
+                            placeholder="VNĐ" required>
                     </div>
                 </div>
-                <!-- phân loại hàng -->
+
                 <div class="d-flex flex-row flex-fill mt-3 align-items-center">
                     <div class="col-2" style="text-align: right;">
                         <p><span class="requird">*</span> Kho hàng</p>
                     </div>
                     <div class="col-10 d-flex flex-row ms-3 ">
-                        <input [(ngModel)]="inStock" style="height: 30px; width: 60%;" type="number" placeholder="Số lượng" required>
+                        <input [(ngModel)]="productInformation.inStock" style="height: 30px; width: 60%;" type="number"
+                            placeholder="Số lượng" required>
                     </div>
                 </div>
             </div>
         </div>
-        <!--phân loại nhóm-->
+
         <div *ngIf="attributes.length > 0" class="d-flex flex-column">
             <!--thêm nhóm phân loại hàng-->
             <div class="d-flex flex-row flex-fill mt-3 align-items-center">
@@ -135,7 +138,7 @@
                                 <p>Nhóm phân loại {{i + 1}}</p>
                             </div>
                             <div class="col-10">
-                                <input style="height: 30px; width: 60%;"  [(ngModel)]="attribute.name" type="text"
+                                <input style="height: 30px; width: 60%;" [(ngModel)]="attribute.name" type="text"
                                     placeholder="Vd : màu sắc v.v" required>
                             </div>
                         </div>
@@ -145,10 +148,11 @@
                                 <p>Phân loại hàng</p>
                             </div>
                             <div class="col-10 d-flex flex-row">
-                                <input style="height: 30px; width: 60%;" (input)="loadProduct()" [(ngModel)]="value.name" type="text"
-                                    placeholder="Vd : trắng đỏ v.v" required>
+                                <input style="height: 30px; width: 60%;" (input)="loadProduct()"
+                                    [(ngModel)]="value.name" type="text" placeholder="Vd : trắng đỏ v.v" required>
                                 <div (click)="deleteValueAtrribute(i,j)" class="d-flex align-items-center ms-2">
-                                    <i class="fa-solid fa-trash"></i></div>
+                                    <i class="fa-solid fa-trash"></i>
+                                </div>
                                 <div (click)="addValueAtrribute(i)" class="d-flex align-items-center ms-2"><i
                                         class="fa-solid fa-plus"></i></div>
                             </div>
@@ -170,19 +174,23 @@
                 </div>
                 <div class="d-flex col-10">
                     <div class=" d-flex flex-row ms-3 ">
-                        <input style="height: 30px; " [(ngModel)]="price" type="number" placeholder="VNĐ" required>
+                        <input style="height: 30px; " [(ngModel)]="this.productInformation.price!" type="number"
+                            placeholder="VNĐ" required>
                     </div>
                     <div class="d-flex flex-row ms-3 ">
-                        <input style="height: 30px; " [(ngModel)]="inStock" type="number" placeholder="Số lượng" required>
+                        <input style="height: 30px; " [(ngModel)]="this.productInformation.inStock!" type="number"
+                            placeholder="Số lượng" required>
                     </div>
                     <div class="d-flex flex-row ms-3 ">
-                        <button (click)="applyForAllGroup()" class="btn text-white" [disabled]="(price == undefined && inStock == undefined)" style="background-color: #ee4d2d;">Áp dụng cho
+                        <button (click)="applyForAllGroup()" class="btn text-white"
+                            [disabled]="(this.productInformation.price! == undefined && this.productInformation.inStock! == undefined)"
+                            style="background-color: #ee4d2d;">Áp dụng cho
                             tất cả</button>
                     </div>
                 </div>
             </div>
             <div class="container" style="width: 80%;">
-                <div *ngIf="attributes.length != 0" >
+                <div *ngIf="attributes.length != 0">
                     <table class="table table-bordered">
                         <thead class="table-success">
                             <tr>
@@ -194,25 +202,26 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let group of groupProduct ; let i = index">
-                                <td  *ngFor="let attribute of group.attributes ; let j = index ">
+                            <tr *ngFor="let group of this.productInformation.details ; let i = index">
+                                <td *ngFor="let attribute of group.attributes ; let j = index ">
                                     <div class="d-flex align-items-center">
                                         <p>{{attribute.value}}</p>
                                     </div>
                                     <div *ngIf="j == 0" class="d-flex flex-row align-items-center">
-                                        <input (change)="selectFileForGroupProduct($event,i)" class="custom-file-input" type="file" id="productImages" 
-                                            name="productImages" accept="image/*"
+                                        <input (change)="selectFileForGroupProduct($event,i)" class="custom-file-input"
+                                            type="file" id="productImages" name="productImages" accept="image/*"
                                             required>
                                         <div style="border: 1px dashed gray;">
-                                            <img  (click)="deleteImageGroup(i)" style="width: 150px; height: auto;"
-                                            [src]="imageGroupProduct[i]" alt="Hình ảnh">
+                                            <img style="width: 150px; height: auto;" [src]="imageGroupProductURL[i]"
+                                                alt="Hình ảnh">
                                         </div>
                                     </div>
-                                    
+
                                 </td>
-                                
+
                                 <td><input [(ngModel)]="group.price" type="number" placeholder="giá tiền" required></td>
-                                <td><input [(ngModel)]="group.inStock" type="number" placeholder="số lượng" required></td>
+                                <td><input [(ngModel)]="group.inStock" type="number" placeholder="số lượng" required>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -223,7 +232,8 @@
 
 </div>
 <div class="sticky mt-3 d-flex align-items-center flex-row-reverse px-5" style="height: 50px;">
-    <button (click)="saveProduct()" class="btn text-white" style="width: 100px; background-color: #ee4d2d ; " [disabled]="!canSave()">Lưu</button>
+    <button (click)="editProduct()" class="btn text-white"
+        style="width: 100px; background-color: #ee4d2d ; ">Edit</button>
 </div>
 <div style="height: 20px;"></div>
 <ng-template #addGroupProduct>
